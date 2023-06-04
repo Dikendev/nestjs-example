@@ -1,0 +1,39 @@
+version: '3'
+
+volumes:
+  # for persistence between restarts
+  mariadb_data: {}
+
+services:
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: nestexample
+      MYSQL_USER: nest
+      MYSQL_PASSWORD: nest
+    volumes:
+      - mariadb_data: /var/lib/mysql
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=delelopment
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    environment:
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: >
+      npm run start:dev
