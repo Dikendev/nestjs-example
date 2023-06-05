@@ -14,7 +14,7 @@ export class EntryService {
     return this.entryRepository.find();
   }
 
-  async findOneById(id: number): Promise<Entry> {
+  async findOneById(id: string): Promise<Entry> {
     const options: FindOneOptions<Entry> = {
       where: { id },
     };
@@ -23,5 +23,9 @@ export class EntryService {
 
   async createOrUpdate(newEntry: Entry): Promise<Entry> {
     return this.entryRepository.save(newEntry);
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.entryRepository.delete(id);
   }
 }
