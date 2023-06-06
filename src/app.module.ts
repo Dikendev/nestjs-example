@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
-import { EntryModule } from './entry/entry.module';
+import { EntryModule } from './modules/entry/entry.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Entry } from './entry/entry.entity';
+import { Entry } from './modules/entry/entry.entity';
 
 @Global()
 @Module({
@@ -19,5 +19,4 @@ import { Entry } from './entry/entry.entity';
     EntryModule,
   ],
 })
-export class AppModule {
-}
+export class AppModule {}
