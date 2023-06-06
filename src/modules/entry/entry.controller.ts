@@ -8,6 +8,8 @@ import {
   Post,
 } from '@nestjs/common';
 import { EntryService } from './entry.service';
+import { Entry } from './entry.entity';
+import { Comment } from '../comment/comment.entity';
 
 @Controller('/entry')
 export class EntryController {
@@ -24,8 +26,11 @@ export class EntryController {
   }
 
   @Post()
-  create(@Body() body) {
-    return this.entryService.createOrUpdate(body);
+  async create(@Body() input: { entry: Entry; comments: Comment[] }) {
+    const { entry, comments } = input;
+    entry.comments = comments;
+
+    return this.entryService.createOrUpdate(entry);
   }
 
   @HttpCode(204)
