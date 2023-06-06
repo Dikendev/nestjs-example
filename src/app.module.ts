@@ -1,10 +1,7 @@
 import { Global, Module } from '@nestjs/common';
-import { EntryService } from './entry/entry.service';
 import { EntryModule } from './entry/entry.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
 import { Entry } from './entry/entry.entity';
-import { EntryController } from './entry/entry.controller';
 
 @Global()
 @Module({
@@ -21,10 +18,6 @@ import { EntryController } from './entry/entry.controller';
     }),
     EntryModule,
   ],
-  controllers: [ EntryController],
-  providers: [EntryService,],
-  exports: [EntryService],
 })
 export class AppModule {
-  constructor(private dataSource: DataSource) {}
 }
