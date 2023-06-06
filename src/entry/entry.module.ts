@@ -8,6 +8,6 @@ import { EntryService } from './entry.service';
   imports: [TypeOrmModule.forFeature([Entry])],
   providers: [EntryService],
   controllers: [EntryController],
-  exports: [TypeOrmModule]
+  exports: [TypeOrmModule,EntryService ]
 })
 export class EntryModule {}
