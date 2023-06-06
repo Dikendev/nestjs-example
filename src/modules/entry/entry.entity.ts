@@ -12,12 +12,14 @@ export class Entry {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('text')
   title: string;
-  @Column()
+  @Column('text')
   body: string;
   @Column()
   image: string;
+  @Column('simple-json')
+  author: { first_name: string; last_name: string };
   @CreateDateColumn()
   create_at: Date;
   @UpdateDateColumn()
