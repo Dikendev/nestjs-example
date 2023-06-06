@@ -2,8 +2,8 @@ import { Global, Module } from '@nestjs/common';
 import { EntryModule } from './modules/entry/entry.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Entry } from './modules/entry/entry.entity';
-import { CommentService } from './modules/comment/comment.service';
 import { CommentModule } from './modules/comment/comment.module';
+import { Comment } from './modules/comment/comment.entity';
 
 @Global()
 @Module({
@@ -15,12 +15,11 @@ import { CommentModule } from './modules/comment/comment.module';
       username: 'nest',
       password: 'nest',
       database: 'nestexample',
-      entities: [Entry],
+      entities: [Entry, Comment],
       synchronize: true,
     }),
     EntryModule,
     CommentModule,
   ],
-  providers: [CommentService],
 })
 export class AppModule {}
