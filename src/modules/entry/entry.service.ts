@@ -17,10 +17,11 @@ export class EntryService {
   async findOneById(id: string): Promise<Entry> {
     const options: FindOneOptions<Entry> = {
       where: { id },
+      relations: ['comments']
     };
-    return this.entryRepository.findOne(options);
+    return await this.entryRepository.findOne(options);
   }
-
+    
   async createOrUpdate(newEntry: Entry): Promise<Entry> {
     return this.entryRepository.save(newEntry);
   }
