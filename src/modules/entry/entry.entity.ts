@@ -25,7 +25,7 @@ export class Entry {
 
   @Column('simple-json')
   author: { first_name: string; last_name: string };
-
+  
   @OneToMany((type) => Comment, (comment) => comment.id, {
     cascade: true,
   })
